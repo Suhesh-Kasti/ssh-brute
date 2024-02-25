@@ -17,6 +17,8 @@ def start_brute(ip, ul=0, pl=0, u=0, p=0, po=0):
                         sys.exit(1)
                 except paramiko.ssh_exception.AuthenticationException:
                     print("Sorry I couldn't crack the credentials")
+                except OSError as e:
+                    print(f"Error: {e}")
 
     elif not pl == 0:
         with open("./credentials/usernames.txt", "r") as usernames_list:
@@ -32,7 +34,8 @@ def start_brute(ip, ul=0, pl=0, u=0, p=0, po=0):
                         sys.exit(1)
                 except paramiko.ssh_exception.AuthenticationException:
                     print("Sorry I couldn't crack the credentials")
-
+                except OSError as e:
+                    print(f"Error: {e}")
 
     elif not u == 0:
         with open("./credentials/passwords.txt", "r") as password_list:
@@ -48,6 +51,8 @@ def start_brute(ip, ul=0, pl=0, u=0, p=0, po=0):
                         sys.exit(1)
                 except paramiko.ssh_exception.AuthenticationException:
                     print("Sorry I couldn't crack the credentials")
+                except OSError as e:
+                    print(f"Error: {e}")
 
     elif not p == 0:
         with open("./credentials/usernames.txt", "r") as usernames_list:
@@ -63,6 +68,8 @@ def start_brute(ip, ul=0, pl=0, u=0, p=0, po=0):
                         sys.exit(1)
                 except paramiko.ssh_exception.AuthenticationException:
                     print("Sorry I couldn't crack the credentials")
+                except OSError as e:
+                    print(f"Error: {e}")
 
     elif not ul == 0 and not pl == 0:
         try:
@@ -75,6 +82,8 @@ def start_brute(ip, ul=0, pl=0, u=0, p=0, po=0):
                 sys.exit(1)
         except paramiko.ssh_exception.AuthenticationException:
             print("Sorry I couldn't crack the credentials")
+        except OSError as e:
+            print(f"Error: {e}")
 
     else:
         with open("./credentials/usernames.txt", "r") as username_file, open("./credentials/passwords.txt", "r") as password_file:
@@ -93,7 +102,8 @@ def start_brute(ip, ul=0, pl=0, u=0, p=0, po=0):
                             sys.exit(1)
                     except paramiko.ssh_exception.AuthenticationException:
                         print(f"Sorry, couldn't crack the credentials for Username: {username} and Password: {password}")
-
+                    except OSError as e:
+                        print(f"Error: {e}")
 
 def main():
     if sys.argv[1] == "-h":
@@ -117,7 +127,7 @@ def main():
             )
 
     if "-po" in sys.argv:
-        port = sys.argv[sys.argv.index("-i") + 1]
+        port = int(sys.argv[sys.argv.index("-po") + 1])
     else:
         port = 22
 
